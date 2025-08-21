@@ -101,7 +101,7 @@ slider.addEventListener("change",()=>{
 //slider value display
 function displaySliderValue(value){
   sliderValue=document.getElementById("valueDisplay");
-  sliderValue.textContent=msToTime(slider.value);
+  sliderValue.textContent=msToTime(slider.value*300000);
   console.log(value);
 }
 
