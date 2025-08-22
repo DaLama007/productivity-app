@@ -54,14 +54,14 @@
   <div class="content">
 
     <div class="side">
-      <label id="valueDisplay">0</label>
-      <input type="range" min="2" max="24" value="20" class="time-slider" id="time-slider">
-      <select class="dropdown">
-      <option>Timer</option>
-      <option>Stopwatch</option>
-      <option>Pomodoro</option>
+      <label id="valueDisplay">10:00</label>
+      <input type="range" min="2" max="30" value="2" class="time-slider" id="time-slider">
+      <select class="dropdown" id="selected-mode">
+      <option id="timerSelector">Timer</option>
+      <option id="stopwatchSelector">Stopwatch</option>
+      <option id="pomodoroSelector">Pomodoro</option>
       </select>
-      <button class="gradient-btn">Set</button>
+      <button class="gradient-btn" onclick="setTandM()">Set</button>
     </div>
 
     <div class="timerBox">
@@ -69,7 +69,7 @@
         <div class="outer">
           <div class="inner">
             <div id="number">
-              30:00
+              10:00
 
             </div>
           </div>

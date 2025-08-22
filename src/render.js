@@ -19,14 +19,14 @@ setInterval(() => {
       }
     });
 }, 500)
-percentage = 100
-setTime = 10000
-time = 10000
-onePercentInTime = time / percentage
+let percentage = 100
+let setTime = 10000
+let time = 10000
+
 let timerInterval = null;
 
 //convert ms to right time format
-function msToTime(ms){
+function msToTime(ms) {
   seconds = ms / 1000;
   hours = Math.floor(seconds / 3600);
   minutes = Math.floor((seconds % 3600) / 60);
@@ -34,7 +34,7 @@ function msToTime(ms){
   return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 
 }
-function startTimer() {
+function startTimer(onePercentInTime) {
   localStorage.setItem('time-left', time);
   document.getElementById('number').textContent = msToTime(time);
   if (time > 0) {
@@ -54,6 +54,7 @@ function startTimer() {
 }
 
 function onClickTimer() {
+
   timerPaused = localStorage.getItem('timerPaused');
   let PSButtonE = document.getElementById('PS-Button');
   if (timerPaused == 'true') {
@@ -69,8 +70,9 @@ function onClickTimer() {
   localStorage.setItem('timerPaused', timerPaused);
 
   if (timerPaused == 'false') {
+    let onePercentInTime = time / percentage
     timerInterval = setInterval(() => {
-      startTimer();
+      startTimer(onePercentInTime);
     }, 100);
   }
   else {
@@ -94,15 +96,28 @@ sidebar.addEventListener("mouseleave", () => {
 });
 
 //slider value listener and getter
-slider=document.getElementById("time-slider");
-slider.addEventListener("change",()=>{
+slider = document.getElementById("time-slider");
+slider.addEventListener("change", () => {
   displaySliderValue(slider.value);
 });
 //slider value display
-function displaySliderValue(value){
-  sliderValue=document.getElementById("valueDisplay");
-  sliderValue.textContent=msToTime(slider.value*300000);
+function displaySliderValue(value) {
+  sliderValue = document.getElementById("valueDisplay");
+  sliderValue.textContent = msToTime(slider.value * 300000);
   console.log(value);
 }
 
+//set time
+function setTandM() {
+  let selectedMode = document.getElementById("selectedMode")
+  if (selectedMode.checked.id=="timerSelector") {
+    let timeDisplay = document.getElementById("number");
+    let valueDisplay = document.getElementById("valueDisplay");
+    timeDisplay.textContent = valueDisplay.textContent;
+    time = slider.value * 300000
+  }
+  else{
+    
+  }
 
+}
