@@ -55,7 +55,7 @@ function startTimer(onePercentInTime) {
 
 function onClickTimer() {
 
-  timerPaused = localStorage.getItem('timerPaused');
+  const timerPaused = localStorage.getItem('timerPaused');
   let PSButtonE = document.getElementById('PS-Button');
   if (timerPaused == 'true') {
     timerPaused = 'false';
@@ -70,10 +70,13 @@ function onClickTimer() {
   localStorage.setItem('timerPaused', timerPaused);
 
   if (timerPaused == 'false') {
-    let onePercentInTime = time / percentage
-    timerInterval = setInterval(() => {
-      startTimer(onePercentInTime);
-    }, 100);
+    const selectedMode = localStorage.getItem("selectedMode");
+    if (selectedMode == "timer" || selectedMode == null) {
+      let onePercentInTime = time / percentage;
+      timerInterval = setInterval(() => {
+        startTimer(onePercentInTime);
+      }, 100);
+    }
   }
   else {
     clearInterval(timerInterval);
@@ -96,7 +99,7 @@ sidebar.addEventListener("mouseleave", () => {
 });
 
 //slider value listener and getter
-slider = document.getElementById("time-slider");
+const slider = document.getElementById("time-slider");
 slider.addEventListener("change", () => {
   displaySliderValue(slider.value);
 });
@@ -109,15 +112,33 @@ function displaySliderValue(value) {
 
 //set time
 function setTandM() {
-  let selectedMode = document.getElementById("selectedMode")
-  if (selectedMode.checked.id=="timerSelector") {
+  let selectedMode = document.getElementById("selected-mode")
+  localStorage.setItem("selectedMode", selectedMode);
+  console.log(selectedMode.value);
+  if (selectedMode.value == "timerSelector") {
     let timeDisplay = document.getElementById("number");
     let valueDisplay = document.getElementById("valueDisplay");
     timeDisplay.textContent = valueDisplay.textContent;
     time = slider.value * 300000
   }
-  else{
-    
+  else {
+    time = 0;
+    timeDisplay.textContent = "00:00"
   }
+
+}
+
+function startStopwatch() {
+
+  time += 1000;
+  document.getElementById('number').textContent = msToTime(time);
+
+  percentage = time / onePercentInTime;
+  const circumference = 2 * Math.PI * 140
+  const offset = circumference * (percentage / 100);
+  // Change the value of the CSS variable
+  document.documentElement.style.setProperty('--offset', offset);
+  time -= 100
+
 
 }
