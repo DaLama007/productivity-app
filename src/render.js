@@ -1,4 +1,8 @@
-
+/*
+================================================================
+          Current Acitivty Tracker
+================================================================
+*/
 let lastWindowId = 0
 let counter = 0
 timerPaused = localStorage.setItem('timerPaused', 'true');
@@ -19,6 +23,11 @@ setInterval(() => {
       }
     });
 }, 500)
+/*
+================================================================
+          Clock change and user control
+================================================================
+*/
 let setTime = 10000
 let time = 10000
 
@@ -91,7 +100,6 @@ function onClickTimer() {
 function collapseElement(element) {
   element.classList.toggle("collapsed");
   document.body.classList.toggle("collapsed");
-  console.log("collapsed sidebar")
 }
 //shrink and expand sidebar if user hovers over it or out
 sidebar = document.getElementById("sidebar");
@@ -111,14 +119,12 @@ slider.addEventListener("change", () => {
 function displaySliderValue(value) {
   sliderValue = document.getElementById("valueDisplay");
   sliderValue.textContent = msToTime(slider.value * 300000);
-  console.log(value);
 }
 
 //set time
 function setTandM() {
   let selectedMode = document.getElementById("selected-mode")
   localStorage.setItem("selectedMode", selectedMode.value);
-  console.log(selectedMode.value);
   let timeDisplay = document.getElementById("number");
   if (selectedMode.value == "timerSelector") {
     let valueDisplay = document.getElementById("valueDisplay");
@@ -141,10 +147,22 @@ function startStopwatch() {
   let percentage = (600000-time) / onePercentInTime;
   const circumference = 2 * Math.PI * 140
   const offset = circumference * (percentage / 100);
-  console.log(offset);
   // Change the value of the CSS variable
   document.documentElement.style.setProperty('--offset', offset);
+}
+/*
+================================================================
+          Distraction Control and customization
+================================================================
+*/
 
-
-
+function addDistraction(){
+  const list=document.getElementById("distraction-list");
+  const userInput = document.getElementById("userInput");
+  const userInputText = userInput.value;
+  console.log(userInputText);
+  if(userInputText != ""){
+    list.innerHTML+= `<div class="distraction-item"><p>${userInputText}</p><button class="delete-btn">❌</button></div>`;
+    userInput.value="";
+  }
 }

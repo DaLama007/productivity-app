@@ -364,16 +364,52 @@ circle {
 }
 
 .item-list {
-  width: 300px;
-  height: 100px;
+  width: 275px;
+  height: 300px;
   border-color: #01FFFF;
   border: 1px solid;
+  overflow-y: auto;
+  
 }
 .userInput-container{
   display: flex;
   gap: 20px;
   align-items: left;
 }
+#userInput{
+  height:30px;
+}
+
+.distraction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  max-width: 400px;
+  font-family: sans-serif;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #d9534f;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  color: #c9302c;
+  transform: scale(1.2);
+}
+
+.delete-btn:active {
+  transform: scale(0.9);
+}
+
 .time-slider{
   -webkit-appearance: none;
   appearance: none;
