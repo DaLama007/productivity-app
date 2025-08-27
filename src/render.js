@@ -155,9 +155,8 @@ function startStopwatch() {
           Distraction Control and customization
 ================================================================
 */
-
+const list=document.getElementById("distraction-list");
 function addDistraction(){
-  const list=document.getElementById("distraction-list");
   const userInput = document.getElementById("userInput");
   const userInputText = userInput.value;
   console.log(userInputText);
@@ -166,3 +165,10 @@ function addDistraction(){
     userInput.value="";
   }
 }
+
+list.addEventListener("click", (e)=>{
+  if(e.target.classList.contains("delete-btn")){
+    const itemDiv = e.target.closest(".distraction-item");
+    if(itemDiv) itemDiv.remove();
+  }
+})
